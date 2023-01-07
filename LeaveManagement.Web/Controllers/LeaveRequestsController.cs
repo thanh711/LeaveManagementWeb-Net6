@@ -20,11 +20,15 @@ namespace LeaveManagement.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILeaveRequestRepository requestRepository;
+        private readonly ILogger<LeaveRequestsController> logger;
 
-        public LeaveRequestsController(ApplicationDbContext context, ILeaveRequestRepository requestRepository)
+        public LeaveRequestsController(ApplicationDbContext context,
+            ILeaveRequestRepository requestRepository,
+            ILogger<LeaveRequestsController> logger)
         {
             _context = context;
             this.requestRepository = requestRepository;
+            this.logger = logger;
         }
 
         // GET: LeaveRequests
@@ -59,8 +63,9 @@ namespace LeaveManagement.Web.Controllers
                 await requestRepository.ChangeApprovalStatus(id, approved);
 
             }
-            catch (Exception)
+            catch (Exception ex )
             {
+                logger.LogError(ex,"Error Approving Request");
                 throw;
             }
             return RedirectToAction(nameof(Index));
@@ -73,8 +78,9 @@ namespace LeaveManagement.Web.Controllers
             {
                 await requestRepository.CancelLeaveRequesr(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                logger.LogError(ex, "Error Cancelling Leave Request");
                 throw;
             }
             return RedirectToAction(nameof(MyLeave));
@@ -109,8 +115,9 @@ namespace LeaveManagement.Web.Controllers
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                logger.LogError(ex, "Error Creating Leave Request");
                 ModelState.AddModelError(String.Empty, "An Error Occurred.Please try again later");
             }
 
