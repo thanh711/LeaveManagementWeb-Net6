@@ -23,6 +23,6 @@ namespace LeaveManagement.Web.Models
 
 
 
-        public LeaveTypeVM? LeaveType { get; set; }
+        public LeaveTypeVM LeaveType { get; set; }
     }
 }

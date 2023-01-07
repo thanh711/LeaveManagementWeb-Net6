@@ -81,15 +81,12 @@ namespace LeaveManagement.Web.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && await leaveAllocationRepository.UpdateEmployeeAllocation(model))
                 {
-                    if(await leaveAllocationRepository.UpdateEmployeeAllocation(model))
-                    {
-                        return RedirectToAction(nameof(ViewAllocations), new { id = model.EmployeeId });
-                    }
+                    return RedirectToAction(nameof(ViewAllocations), new { id = model.EmployeeId });
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 ModelState.AddModelError(string.Empty, "An Error Has Occurred. Please Try Again Later");
                

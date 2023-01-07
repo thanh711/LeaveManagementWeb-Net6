@@ -73,7 +73,7 @@ namespace LeaveManagement.Web.Controllers
             {
                 await requestRepository.CancelLeaveRequesr(id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -109,7 +109,7 @@ namespace LeaveManagement.Web.Controllers
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ModelState.AddModelError(String.Empty, "An Error Occurred.Please try again later");
             }

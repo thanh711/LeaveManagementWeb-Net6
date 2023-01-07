@@ -9,7 +9,9 @@ namespace LeaveManagement.Web.Models
         public int Id { get; set; }
 
 
-        [Display(Name = "Date Request")]  
+        [Display(Name = "Date Request")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
         public DateTime DateRequest { get; set; }
 
 
@@ -20,7 +22,7 @@ namespace LeaveManagement.Web.Models
         public bool? Approved { get; set; }
         public bool Cancelled { get; set; }
 
-        public string? RequestingEmployeeId { get; set; }
+        public string RequestingEmployeeId { get; set; }
         public EmployeeListVM Employee { get; set; }
 
     }
